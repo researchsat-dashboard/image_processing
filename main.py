@@ -22,7 +22,7 @@ detector = cv2.SimpleBlobDetector_create(params)
 
 keypoints = detector.detect(blur)
 
-keypoint = cv2.drawKeypoints(blur, keypoints, np.array([]), (255,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+keypoint = cv2.drawKeypoints(regular_cell_image, keypoints, np.array([]), (255,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 number_of_blobs = len(keypoints)
 text = "Total Cell Count: " + str(len(keypoints))
