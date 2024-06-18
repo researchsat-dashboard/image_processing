@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 cell_image = cv2.imread("img.jpg", 0)
 regular_cell_image = cell_image
 cell_image = cv2.bitwise_not(cell_image)
-blur = cv2.GaussianBlur(cell_image, (0,0), sigmaX=35, sigmaY=35)
+blur = cv2.GaussianBlur(cell_image, (0,0), sigmaX=4.5, sigmaY=4.5)
 
 thresh, bw = cv2.threshold(cell_image, 128, 255, cv2.THRESH_OTSU)
 
@@ -20,7 +20,7 @@ params.filterByColor = True
 params.blobColor = 0
 
 params.filterByArea = True
-params.minArea = 30 # increase to 500 to reduce detected cells
+params.minArea = 3 # increase to 500 to reduce detected cells
 
 detector = cv2.SimpleBlobDetector_create(params)
 
