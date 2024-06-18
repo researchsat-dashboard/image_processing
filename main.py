@@ -20,7 +20,7 @@ params.filterByColor = True
 params.blobColor = 0
 
 params.filterByArea = True
-params.minArea = 3 # increase to 500 to reduce detected cells
+params.minArea = 1 # increase to 500 to reduce detected cells
 
 detector = cv2.SimpleBlobDetector_create(params)
 
