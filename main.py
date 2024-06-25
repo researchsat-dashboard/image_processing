@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 current_dt = datetime.now()
-current_dt_string = current_dt.strftime("%d.%m.%Y_%H.%M.%S.jpg")
+current_dt_string = current_dt.strftime("%Y.%m.%d_%H.%M.%S.jpg")
 
 cell_image = cv2.imread("img.tiff", 0)
 regular_cell_image = cell_image
