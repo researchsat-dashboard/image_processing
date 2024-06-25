@@ -58,7 +58,7 @@ def main():
         cv2.putText(keypoint, text, (360, 490), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255), 2)
 
         cv2.imwrite(os.path.join(out_path , current_dt_string), keypoint)
-        sleep(2)
+        sleep(1.5)
 
 if __name__ == '__main__':
     main()
