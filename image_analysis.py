@@ -51,7 +51,7 @@ def main():
 
         keypoints = detector.detect(blur)
 
-        keypoint = cv2.drawKeypoints(bw, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        keypoint = cv2.drawKeypoints(wb, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
         number_of_blobs = len(keypoints)
         text = "Total Cell Count: " + str(len(keypoints))
