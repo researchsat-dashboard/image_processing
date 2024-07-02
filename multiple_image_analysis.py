@@ -6,7 +6,7 @@ from time import sleep
 
 from datetime import datetime
 
-def main():
+def multiple_image_analysis():
     out_path = ""
     path = ""
 
@@ -59,6 +59,3 @@ def main():
 
         cv2.imwrite(os.path.join(out_path , current_dt_string), keypoint)
         sleep(1.5)
-
-if __name__ == '__main__':
-    main()
