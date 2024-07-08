@@ -6,9 +6,10 @@ from datetime import datetime
 
 def single_image_analysis():
     current_dt = datetime.now()
-    timestamp_string = current_dt.strftime("%Y.%m.%d %H.%M.%S")
+    timestamp_string = current_dt.strftime("%Y/%m/%d %H:%M:%S")
     current_dt_string = current_dt.strftime("%Y.%m.%d_%H.%M.%S.jpg")
 
+    regular_image = cv2.imread("img.tiff")
     cell_image = cv2.imread("img.tiff", 0)
     cell_image = cv2.bitwise_not(cell_image)
     blur = cv2.GaussianBlur(cell_image, (0,0), sigmaX=3.5, sigmaY=3.5)
@@ -43,19 +44,19 @@ def single_image_analysis():
 
     keypoints = detector.detect(blur)
 
-    keypoint = cv2.drawKeypoints(wb, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    keypoint = cv2.drawKeypoints(regular_image, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
-    number_of_blobs = len(keypoints)
-    cell_count_text = "Cell Count: " + str(number_of_blobs)
+    cell_count = len(keypoints)
+    cell_count_text = "Cell Count: "
     cell_type = "Yeast"
-    cell_type_text = "Cell Type: " + cell_type
+    cell_type_text = "Cell Type: "
     experiment = "Cell Culture"
-    experiment_text = "Experiment: " + experiment
+    experiment_text = "Experiment: "
     mission = "ADI-AMR"
-    mission_text = "Mission: " + mission
-    timestamp_text = "Timestamp: " + timestamp_string
-    image_number = ""
-    image_number_text = "Image Number: 1 of 1000"
+    mission_text = "Mission: "
+    timestamp_text = "Timestamp: "
+    image_number = "1 of 1000"
+    image_number_text = "Image Number: "
 
     cv2.imwrite(current_dt_string, keypoint)
     cv2.imwrite("blurred_cells.jpg", blur)
@@ -65,18 +66,36 @@ def single_image_analysis():
     image = Image.open(current_dt_string)
 
     extra_height = 150
-    font = ImageFont.truetype("FiraCode-Bold.ttf", size=16)
+    regular_font = ImageFont.truetype("FiraCode-Retina.ttf", size=16)
+    bold_font = ImageFont.truetype("FiraCode-Bold.ttf", size=16)
 
     new_image = Image.new("RGB", (image.width, image.height + extra_height))
     new_image.paste(image, (0,0))
 
     draw = ImageDraw.Draw(new_image)
-    draw.text((400, 525), cell_type_text, font=font)
-    draw.text((400, 550), cell_count_text, font=font)
-    draw.text((400, 575), experiment_text, font=font)
-    draw.text((400, 600), mission_text, font=font)
-    draw.text((400, 625), timestamp_text, font=font)
-    draw.text((400, 650), image_number_text, font=font)
+    draw.text((400, 525), cell_type_text, font=bold_font)
+    cell_type_text_width = bold_font.getlength(cell_type_text)
+    draw.text((400 + cell_type_text_width, 525), cell_type, font=regular_font)
+
+    draw.text((400, 550), cell_count_text, font=bold_font)
+    cell_count_text_width = bold_font.getlength(cell_count_text)
+    draw.text((400 + cell_count_text_width, 550), str(cell_count), font=regular_font)
+
+    draw.text((400, 575), experiment_text, font=bold_font)
+    experiment_text_width = bold_font.getlength(experiment_text)
+    draw.text((400 + experiment_text_width, 575), experiment, font=regular_font)
+
+    draw.text((400, 600), mission_text, font=bold_font)
+    mission_text_width = bold_font.getlength(mission_text)
+    draw.text((400 + mission_text_width, 600), mission, font=regular_font)
+
+    draw.text((400, 625), timestamp_text, font=bold_font)
+    timestamp_text_width = bold_font.getlength(timestamp_text)
+    draw.text((400 + timestamp_text_width, 625), timestamp_string, font=regular_font)
+
+    draw.text((400, 650), image_number_text, font=bold_font)
+    image_number_text_width = bold_font.getlength(image_number_text)
+    draw.text((400 + image_number_text_width, 650), image_number, font=regular_font)
 
     new_image.save("modified_image.jpg")
 
