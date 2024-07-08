@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
-
 from datetime import datetime
 
 def single_image_analysis():
@@ -11,11 +10,10 @@ def single_image_analysis():
     current_dt_string = current_dt.strftime("%Y.%m.%d_%H.%M.%S.jpg")
 
     cell_image = cv2.imread("img.tiff", 0)
-    regular_cell_image = cell_image
     cell_image = cv2.bitwise_not(cell_image)
     blur = cv2.GaussianBlur(cell_image, (0,0), sigmaX=3.5, sigmaY=3.5)
 
-    thresh, bw = cv2.threshold(cell_image, 1, 255, cv2.THRESH_OTSU)
+    _, bw = cv2.threshold(cell_image, 1, 255, cv2.THRESH_OTSU)
 
     wb = cv2.bitwise_not(bw)
 
@@ -58,12 +56,6 @@ def single_image_analysis():
     timestamp_text = "Timestamp: " + timestamp_string
     image_number = ""
     image_number_text = "Image Number: 1 of 1000"
-    # cv2.putText(keypoint, cell_type_text, (400, 380), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
-    # cv2.putText(keypoint, cell_count_text, (400, 405), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
-    # cv2.putText(keypoint, experiment_text, (400, 430), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
-    # cv2.putText(keypoint, mission_text, (400, 455), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
-    # cv2.putText(keypoint, timestamp_text, (400, 480), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
-    # cv2.putText(keypoint, image_number_text, (400, 505), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 2)
 
     cv2.imwrite(current_dt_string, keypoint)
     cv2.imwrite("blurred_cells.jpg", blur)
