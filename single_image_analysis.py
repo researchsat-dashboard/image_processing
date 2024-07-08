@@ -64,13 +64,17 @@ def single_image_analysis():
     cv2.imwrite("black_cells.jpg", bw)
 
     image = Image.open(current_dt_string)
+    rs_logo = Image.open("rs-logo.png")
 
     extra_height = 150
+    new_logo_size = 354.9, 74.1
+    rs_logo.thumbnail(new_logo_size)
     regular_font = ImageFont.truetype("FiraCode-Retina.ttf", size=16)
     bold_font = ImageFont.truetype("FiraCode-Bold.ttf", size=16)
 
-    new_image = Image.new("RGB", (image.width, image.height + extra_height))
+    new_image = Image.new("RGB", (image.width, image.height + extra_height), color=(23, 36, 45))
     new_image.paste(image, (0,0))
+    new_image.paste(rs_logo, (20, 560), mask=rs_logo)
 
     draw = ImageDraw.Draw(new_image)
     draw.text((400, 525), cell_type_text, font=bold_font)
