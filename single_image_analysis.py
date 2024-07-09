@@ -59,9 +59,9 @@ def single_image_analysis():
     image_number_text = "Image Number: "
 
     cv2.imwrite(current_dt_string, keypoint)
-    cv2.imwrite("blurred_cells.jpg", blur)
-    cv2.imwrite("white_cells.jpg", wb)
-    cv2.imwrite("black_cells.jpg", bw)
+    # cv2.imwrite("blurred_cells.jpg", blur)
+    # cv2.imwrite("white_cells.jpg", wb)
+    # cv2.imwrite("black_cells.jpg", bw)
 
     image = Image.open(current_dt_string)
     rs_logo = Image.open("rs-logo.png")
@@ -101,9 +101,9 @@ def single_image_analysis():
     image_number_text_width = bold_font.getlength(image_number_text)
     draw.text((400 + image_number_text_width, 650), image_number, font=regular_font)
 
-    new_image.save("modified_image.jpg")
+    new_image.save(current_dt_string)
 
-    plt.imshow(keypoint, cmap="gray")
-    plt.show()
+    # plt.imshow(keypoint, cmap="gray")
+    # plt.show()
 
 single_image_analysis()
