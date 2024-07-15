@@ -1,6 +1,11 @@
 from PIL import Image
+from datetime import datetime
 
 def image_stitch():
+
+    current_dt = datetime.now()
+    current_dt_string = current_dt.strftime("%Y.%m.%d_%H.%M.%S-collage.jpg")
+
     image1 = Image.open('image1.jpg')
     image2 = Image.open('image2.jpg')
     image3 = Image.open('image3.jpg')
@@ -20,16 +25,6 @@ def image_stitch():
 
     new_image = Image.new('RGB', (2088, 2010))
 
-    # image1 = image1.resize(smaller_size)
-    # image2 = image2.resize(smaller_size)
-    # image3 = image3.resize(smaller_size)
-    # image4 = image4.resize(smaller_size)
-    # image5 = image5.resize(smaller_size)
-    # image6 = image6.resize(smaller_size)
-    # image7 = image7.resize(smaller_size)
-    # image8 = image8.resize(smaller_size)
-    # image9 = image9.resize(smaller_size)
-
     new_image.paste(image1, (0,0))
     new_image.paste(image2, (collage_width, 0))
     new_image.paste(image3, (collage_width * 2, 0))
@@ -40,6 +35,4 @@ def image_stitch():
     new_image.paste(image8, (collage_width, collage_height * 2))
     new_image.paste(image9, (collage_width * 2, collage_height * 2))
 
-    new_image.save('collage.jpg')
-
-image_stitch()
+    new_image.save(current_dt_string)

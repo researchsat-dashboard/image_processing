@@ -4,14 +4,17 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 import os
 from time import sleep
+from image_stitch import image_stitch
 
 from datetime import datetime
 
 def multiple_image_analysis():
     out_path = ""
     path = ""
+    collage_out = ""
 
     image_num = 1
+    collage_image_num = 1
 
     for image_path in os.listdir(path):
         input_path = os.path.join(path, image_path)
@@ -110,8 +113,24 @@ def multiple_image_analysis():
         draw.text((400 + image_number_text_width, 650), image_number, font=regular_font)
 
         new_image.save(out_path + "/" + current_dt_string)
+        new_image.save(collage_out + "/" + f"image{collage_image_num}.jpg")
 
         image_num += 1
+        collage_image_num += 1
+
+        if collage_image_num == 10:
+            image_stitch()
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            os.remove("")
+            collage_image_num = 1
+
 
         sleep(1.5)
 

@@ -3,3 +3,4 @@ rawimagedataset-rst-dashboard2024
 out
 *.jpg
 *.tiff
+__pycache__/
