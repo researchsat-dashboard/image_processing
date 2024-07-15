@@ -19,10 +19,6 @@ def image_stitch():
     collage_width = image1.width
     collage_height = image1.height
 
-    smaller_size = (232, 173)
-    smaller_image_width = 232
-    smaller_image_height = 173
-
     new_image = Image.new('RGB', (2088, 2010))
 
     new_image.paste(image1, (0,0))

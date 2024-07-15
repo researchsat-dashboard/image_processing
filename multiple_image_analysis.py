@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 from time import sleep
 from image_stitch import image_stitch
-
 from datetime import datetime
 
 def multiple_image_analysis():
@@ -130,7 +129,6 @@ def multiple_image_analysis():
             os.remove("")
             os.remove("")
             collage_image_num = 1
-
 
         sleep(1.5)
 
